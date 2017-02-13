@@ -26,26 +26,38 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <AutoCompleteTextView
-                    android:id="@+id/email"
+                    android:id="@+id/sudent_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/prompt_email"
-                    android:inputType="textEmailAddress"
+                    android:hint="Student Number"
+                    android:inputType="number"
                     android:maxLines="1"
                     android:singleLine="true" />
 
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
                 <EditText
-                    android:id="@+id/name"
+                    android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Password"
                     android:imeActionId="@+id/login"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <TableLayout
                 android:layout_width="match_parent"
