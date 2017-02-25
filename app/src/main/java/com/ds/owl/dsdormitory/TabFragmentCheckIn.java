@@ -73,6 +73,7 @@ public class TabFragmentCheckIn extends Fragment {
             }
         });
 
+
         return v;
 
     }

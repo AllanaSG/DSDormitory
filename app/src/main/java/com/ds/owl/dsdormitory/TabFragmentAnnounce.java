@@ -17,7 +17,6 @@ public class TabFragmentAnnounce extends Fragment {
 
     Button login;
 
-
     public TabFragmentAnnounce() {
         // Required empty public constructor
     }

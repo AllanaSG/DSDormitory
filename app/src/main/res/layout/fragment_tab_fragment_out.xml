@@ -1,13 +1,203 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.ds.owl.dsdormitory.TabFragmentOut">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10sp"
+        android:background="#84213f">
+        <TableRow>
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="이름"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                />
+            <TextView
+                android:text="호실"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                />
+            <TextView
+                android:text="학부(과)전공"
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                />
+        </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/sudent_name"
+                    android:textSize="17sp"
+                    android:textAlignment="center"
+                    android:text="이성경"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/room_number"
+                    android:textSize="17sp"
+                    android:textAlignment="center"
+                    android:text="202호"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:textColor="#000000"/>
+                <TextView
+                    android:id="@+id/student_major"
+                    android:textSize="17sp"
+                    android:textAlignment="center"
+                    android:text="디지털미디어"
+                    android:layout_weight="1"
+                    android:background="#ffffff"
+                    android:textColor="#000000"/>
+            </TableRow>
+        <TableRow>
+            <TextView
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:text="외박 신청하기"
+                android:background="#84213f"
+                android:textColor="#ffffff"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:text="신청일"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:background="#84213f"
+                android:textColor="#ffffff"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/today"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:text="2017/02/14"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:textColor="#000000"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:text="외박신청기간"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:background="#84213f"
+                android:textColor="#ffffff"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/out_start"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="시작일"
+                android:drawableLeft="@drawable/cal"
+                android:background="#ffffff" />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/out_end"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="종료일"
+                android:drawableLeft="@drawable/cal"
+                android:background="#ffffff"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:text="행선지"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_weight="1"/>
+            <EditText
+                android:id="@+id/desti"
+                android:layout_width="0dp"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:padding="0sp"
+                android:inputType="textMultiLine"
+                android:background="#ffffff"
+                android:textColor="#000000"
+                android:nextFocusDown="@+id/reason"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:text="외박사유"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:textColor="#ffffff"
+                android:layout_weight="1"/>
+            <EditText
+                android:id="@+id/reason"
+                android:layout_width="0dp"
+                android:textSize="17sp"
+                android:textAlignment="center"
+                android:layout_weight="1"
+                android:padding="0sp"
+                android:inputType="textMultiLine"
+                android:background="#ffffff"
+                android:textColor="#000000"/>
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:layout_height="5sp"/>
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/out_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="신청하기"
+        android:layout_gravity="center"
+        android:layout_marginTop="10sp"/>
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="23sp"
+        android:text="외박신청 목록"
+        android:background="#84213f"
+        android:textAlignment="center"
+        android:textSize="17sp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10sp"/>
+    <ListView
+        android:id="@+id/out_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
-</FrameLayout>
+
+</LinearLayout>
+</ScrollView>
