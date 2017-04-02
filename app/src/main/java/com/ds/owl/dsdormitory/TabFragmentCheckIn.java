@@ -33,6 +33,7 @@ public class TabFragmentCheckIn extends Fragment {
 
     ToggleButton backmonitoringBtn;
     Button foremonitoringBtn;
+    Button forerangingBtn;
 
     public TabFragmentCheckIn() {
         // Required empty public constructor
@@ -70,6 +71,15 @@ public class TabFragmentCheckIn extends Fragment {
             public void onClick(View v) {
                 //Button btn = (Button)v;
                 getActivity().startActivity(new Intent(getActivity(),RecoMonitoringActivity.class));
+            }
+        });
+
+        forerangingBtn = (Button)v.findViewById(R.id.rangingButton);
+
+        forerangingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), RecoRangingActivity.class));
             }
         });
 

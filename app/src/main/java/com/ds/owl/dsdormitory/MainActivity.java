@@ -7,6 +7,9 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -14,9 +17,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.TabHost;
+import android.widget.TextView;
+
+import com.perples.recosdk.RECOBeacon;
+
+import static com.ds.owl.dsdormitory.LoginActivity.GET_NAME;
+import static com.ds.owl.dsdormitory.LoginActivity.name;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAB_TAG = "currentTab";
 
+    TextView get_name;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
 
         mBluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = mBluetoothManager.getAdapter();
+
+        get_name = (TextView)findViewById(R.id.get_name);
+        get_name.setText(name.toString());
 
         if(mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
             Intent enableBTIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
@@ -67,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                 Log.i("MainActivity", "The location permission (ACCESS_COARSE_LOCATION or ACCESS_FINE_LOCATION) is already granted.");
             }
         }
+
+
 
         tabHost = (TabHost)findViewById(android.R.id.tabhost);
         tabHost.setup();
@@ -92,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_ENABLE_BT && resultCode == Activity.RESULT_CANCELED) {
@@ -100,7 +121,10 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
+
         super.onActivityResult(requestCode, resultCode, data);
+
+
     }
 
     @Override

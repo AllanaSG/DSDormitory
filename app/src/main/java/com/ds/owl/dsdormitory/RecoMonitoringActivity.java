@@ -27,8 +27,8 @@ public class RecoMonitoringActivity extends RecoActivity implements RECOMonitori
      * We recommend 1 second for scanning, 10 seconds interval between scanning, and 60 seconds for region expiration time.
      * 1초 스캔, 10초 간격으로 스캔, 60초의 region expiration time은 당사 권장사항입니다.
      */
-    private long mScanPeriod = 1*1000L;
-    private long mSleepPeriod = 10*1000L;
+    private long mScanPeriod = 2*1000L;
+    private long mSleepPeriod = 1*1000L;
 
     private boolean mInitialSetting = true;
 

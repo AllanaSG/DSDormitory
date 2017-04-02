@@ -31,8 +31,8 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
      * We recommend 1 second for scanning, 10 seconds interval between scanning, and 60 seconds for region expiration time.
      * 1초 스캔, 10초 간격으로 스캔, 60초의 region expiration time은 당사 권장사항입니다.
      */
-    private long mScanDuration = 1*1000L;
-    private long mSleepDuration = 10*1000L;
+    private long mScanDuration = 2*1000L;
+    private long mSleepDuration = 1*1000L;
     private long mRegionExpirationTime = 60*1000L;
     private int mNotificationID = 9999;
 
@@ -148,7 +148,7 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
 
     @Override
     public void onServiceConnect() {
-        Log.i("BackMonitoringService", "onServiceConnect()");
+        Log.i("백그라운드 모니터링 작동", "onServiceConnect()");
         this.startMonitoring();
         //Write the code when RECOBeaconManager is bound to RECOBeaconService
     }
@@ -171,7 +171,7 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
 
         //Get the region and found beacon list in the entered region
         Log.i("BackMonitoringService", "didEnterRegion() - " + region.getUniqueIdentifier());
-        this.popupNotification("Inside of " + region.getUniqueIdentifier());
+        this.popupNotification("입실 ");
         //Write the code when the device is enter the region
     }
 
@@ -186,7 +186,7 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
          */
 
         Log.i("BackMonitoringService", "didExitRegion() - " + region.getUniqueIdentifier());
-        this.popupNotification("Outside of " + region.getUniqueIdentifier());
+        this.popupNotification("퇴실 ");
         //Write the code when the device is exit the region
     }
 
