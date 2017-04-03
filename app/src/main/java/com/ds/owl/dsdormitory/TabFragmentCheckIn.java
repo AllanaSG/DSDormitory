@@ -11,6 +11,21 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,17 +84,42 @@ public class TabFragmentCheckIn extends Fragment {
         foremonitoringBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Button btn = (Button)v;
+
                 getActivity().startActivity(new Intent(getActivity(),RecoMonitoringActivity.class));
-            }
-        });
 
-        forerangingBtn = (Button)v.findViewById(R.id.rangingButton);
+                try
+                {
+                    HttpClient httpClient = new DefaultHttpClient();
 
-        forerangingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(), RecoRangingActivity.class));
+                    String url = "http://192.168.35.169:8080/0401/checkin.jsp";
+                    String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
+                    String pwd = String.valueOf(LoginActivity.password.getText().toString());
+
+                    if(studnum!=null&&pwd!=null&&RecoMonitoringActivity.time!=null&&RecoMonitoringListAdapter.attendance!=null) {
+                        List list = new ArrayList();
+                        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                        nameValuePairs.add(new BasicNameValuePair("Student Number", studnum));
+                        nameValuePairs.add(new BasicNameValuePair("Password", pwd));
+
+                        nameValuePairs.add(new BasicNameValuePair("Time", RecoMonitoringActivity.time));
+                        nameValuePairs.add(new BasicNameValuePair("Attendance", RecoMonitoringListAdapter.attendance));
+
+                        HttpParams params = httpClient.getParams();
+                        HttpConnectionParams.setConnectionTimeout(params, 5000);
+                        HttpConnectionParams.setSoTimeout(params, 5000);
+
+                        HttpPost httpPost1 = new HttpPost(url);
+                        UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nameValuePairs, "euc-kr");
+                        httpPost1.setEntity(entity);
+
+                        HttpResponse response = httpClient.execute(httpPost1);
+                        HttpEntity resEntity = response.getEntity();
+                    }
+
+
+                }
+                catch (IOException e){}
             }
         });
 

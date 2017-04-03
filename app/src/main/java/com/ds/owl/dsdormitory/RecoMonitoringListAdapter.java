@@ -23,6 +23,7 @@ public class RecoMonitoringListAdapter extends BaseAdapter {
     private HashMap<RECOBeaconRegion, String> mLastUpdateTime;
     private HashMap<RECOBeaconRegion, Integer> mMatchedBeaconCounts;
     private ArrayList<RECOBeaconRegion> mMonitoredRegionLists;
+    public static String attendance;
 
     private LayoutInflater mLayoutInflater;
 
@@ -94,11 +95,13 @@ public class RecoMonitoringListAdapter extends BaseAdapter {
 
         if(recoRegionState.equals(RECOBeaconRegionState.RECOBeaconRegionInside.toString()) && mMatchedBeaconCounts.get(recoRegion) == 0) {
             viewHolder.recoRegionBeaconCount.setText("입실");
+            attendance = "입실";
             return convertView;
         }
 
         if(recoRegionState.equals(RECOBeaconRegionState.RECOBeaconRegionOutside.toString())) {
             viewHolder.recoRegionBeaconCount.setText("퇴실");
+            attendance = "퇴실";
             return convertView;
         }
 

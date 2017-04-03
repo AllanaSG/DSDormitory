@@ -34,8 +34,8 @@ import static android.R.attr.id;
 
 public class LoginActivity extends AppCompatActivity {
 
-    AutoCompleteTextView studentnumber;
-    EditText password;
+    public static AutoCompleteTextView studentnumber;
+    public static EditText password;
     Button loginbutton;
 
     public static String name="";
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    String page = "http://192.168.35.248:8080/0401/dormlogin.jsp";
+                                    String page = "http://192.168.35.169:8080/0401/dormlogin.jsp";
                                     HttpClient http = new DefaultHttpClient();
 
                                     ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();

@@ -20,6 +20,9 @@ import java.util.Locale;
 
 public class RecoMonitoringActivity extends RecoActivity implements RECOMonitoringListener {
 
+    public SimpleDateFormat sdf1;
+    public static String time;
+
     private RecoMonitoringListAdapter mMonitoringListAdapter;
     private ListView mRegionListView;
 
@@ -95,6 +98,9 @@ public class RecoMonitoringActivity extends RecoActivity implements RECOMonitori
         if(mInitialSetting) {
             mMonitoringListAdapter.updateRegion(recoRegion, recoRegionState, 0, new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(new Date()));
             mMonitoringListAdapter.notifyDataSetChanged();
+            Date today=new Date();
+            sdf1 =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA);
+            time=sdf1.format(today);
         }
 
         mInitialSetting = false;
