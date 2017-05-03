@@ -156,44 +156,25 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
     @Override
     public void didDetermineStateForRegion(RECOBeaconRegionState state, RECOBeaconRegion region) {
         Log.i("BackMonitoringService", "didDetermineStateForRegion()");
-        //Write the code when the state of the monitored region is changed
     }
 
     @Override
     public void didEnterRegion(RECOBeaconRegion region, Collection<RECOBeacon> beacons) {
-        /**
-         * For the first run, this callback method will not be called.
-         * Please check the state of the region using didDetermineStateForRegion() callback method.
-         *
-         * 최초 실행시, 이 콜백 메소드는 호출되지 않습니다.
-         * didDetermineStateForRegion() 콜백 메소드를 통해 region 상태를 확인할 수 있습니다.
-         */
 
-        //Get the region and found beacon list in the entered region
         Log.i("BackMonitoringService", "didEnterRegion() - " + region.getUniqueIdentifier());
         this.popupNotification("입실 ");
-        //Write the code when the device is enter the region
+
     }
 
     @Override
     public void didExitRegion(RECOBeaconRegion region) {
-        /**
-         * For the first run, this callback method will not be called.
-         * Please check the state of the region using didDetermineStateForRegion() callback method.
-         *
-         * 최초 실행시, 이 콜백 메소드는 호출되지 않습니다.
-         * didDetermineStateForRegion() 콜백 메소드를 통해 region 상태를 확인할 수 있습니다.
-         */
-
         Log.i("BackMonitoringService", "didExitRegion() - " + region.getUniqueIdentifier());
         this.popupNotification("퇴실 ");
-        //Write the code when the device is exit the region
     }
 
     @Override
     public void didStartMonitoringForRegion(RECOBeaconRegion region) {
         Log.i("BackMonitoringService", "didStartMonitoringForRegion() - " + region.getUniqueIdentifier());
-        //Write the code when starting monitoring the region is started successfully
     }
 
     private void popupNotification(String msg) {

@@ -15,7 +15,7 @@ import android.widget.Button;
  */
 public class TabFragmentAnnounce extends Fragment {
 
-    Button login;
+
 
     public TabFragmentAnnounce() {
         // Required empty public constructor
@@ -28,14 +28,7 @@ public class TabFragmentAnnounce extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_tab_fragment_announce, container, false);
 
-        login = (Button)v.findViewById(R.id.login);
 
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().startActivity(new Intent(getActivity(),LoginActivity.class));
-            }
-        });
 
         return v;
     }

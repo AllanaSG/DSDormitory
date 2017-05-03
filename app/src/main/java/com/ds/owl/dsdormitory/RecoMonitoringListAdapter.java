@@ -96,12 +96,14 @@ public class RecoMonitoringListAdapter extends BaseAdapter {
         if(recoRegionState.equals(RECOBeaconRegionState.RECOBeaconRegionInside.toString()) && mMatchedBeaconCounts.get(recoRegion) == 0) {
             viewHolder.recoRegionBeaconCount.setText("입실");
             attendance = "입실";
+            TabFragmentCheckIn.click();
             return convertView;
         }
 
         if(recoRegionState.equals(RECOBeaconRegionState.RECOBeaconRegionOutside.toString())) {
             viewHolder.recoRegionBeaconCount.setText("퇴실");
             attendance = "퇴실";
+            TabFragmentCheckIn.click();
             return convertView;
         }
 

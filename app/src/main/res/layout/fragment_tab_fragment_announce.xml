@@ -5,11 +5,7 @@
     tools:context="com.ds.owl.dsdormitory.TabFragmentAnnounce">
 
     <!-- TODO: Update blank fragment layout -->
-    <Button
-        android:text="Login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login" />
+    >
 
 
 </FrameLayout>

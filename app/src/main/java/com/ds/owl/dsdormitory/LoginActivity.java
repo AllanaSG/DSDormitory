@@ -64,11 +64,11 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    String page = "http://192.168.35.169:8080/0401/dormlogin.jsp";
+                                    String page = "http://192.168.35.61:8080/0401/dormlogin.jsp";
                                     HttpClient http = new DefaultHttpClient();
 
                                     ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();
-                                    postData.add(new BasicNameValuePair("id", studentnumber.getText().toString()));
+                                    postData.add(new BasicNameValuePair("studentnumber", studentnumber.getText().toString()));
                                     postData.add(new BasicNameValuePair("pwd", password.getText().toString()));
                                     UrlEncodedFormEntity request = new UrlEncodedFormEntity(postData, "utf-8");
                                     HttpPost httpPost = new HttpPost(page);
@@ -83,14 +83,17 @@ public class LoginActivity extends AppCompatActivity {
                                         JSONObject row = jArray.getJSONObject(0);
                                         name = row.getString("name");
                                         result = name + "님 환영합니다.";
+                                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(getApplicationContext(), SMScertifyActivity.class);
+                                        startActivity(intent);
+
+                                        //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        //startActivity(intent);
                                     } else {
                                         result = "아이디 또는 비밀번호가 일치하지 않습니다.";
+                                        Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
                                     }
-                                    Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                   // intent.putExtra("INPUT_NAME", name);
-                                    // setResult(RESULT_OK, intent);
-                                    startActivity(intent);
+
 
                                 } catch (IOException e) {
                                     e.printStackTrace();

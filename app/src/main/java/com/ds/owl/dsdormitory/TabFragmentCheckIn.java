@@ -48,7 +48,6 @@ public class TabFragmentCheckIn extends Fragment {
 
     ToggleButton backmonitoringBtn;
     Button foremonitoringBtn;
-    Button forerangingBtn;
 
     public TabFragmentCheckIn() {
         // Required empty public constructor
@@ -79,6 +78,8 @@ public class TabFragmentCheckIn extends Fragment {
             }
         });
 
+
+
         foremonitoringBtn = (Button)v.findViewById(R.id.monitoringButton);
 
         foremonitoringBtn.setOnClickListener(new View.OnClickListener() {
@@ -87,21 +88,19 @@ public class TabFragmentCheckIn extends Fragment {
 
                 getActivity().startActivity(new Intent(getActivity(),RecoMonitoringActivity.class));
 
-                try
+              /*  try
                 {
                     HttpClient httpClient = new DefaultHttpClient();
 
-                    String url = "http://192.168.35.169:8080/0401/checkin.jsp";
+                    String url = "http://192.168.35.241:8080/0401/checkin.jsp";
                     String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
                     String pwd = String.valueOf(LoginActivity.password.getText().toString());
 
                     if(studnum!=null&&pwd!=null&&RecoMonitoringActivity.time!=null&&RecoMonitoringListAdapter.attendance!=null) {
-                        List list = new ArrayList();
                         ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 
                         nameValuePairs.add(new BasicNameValuePair("Student Number", studnum));
                         nameValuePairs.add(new BasicNameValuePair("Password", pwd));
-
                         nameValuePairs.add(new BasicNameValuePair("Time", RecoMonitoringActivity.time));
                         nameValuePairs.add(new BasicNameValuePair("Attendance", RecoMonitoringListAdapter.attendance));
 
@@ -116,10 +115,8 @@ public class TabFragmentCheckIn extends Fragment {
                         HttpResponse response = httpClient.execute(httpPost1);
                         HttpEntity resEntity = response.getEntity();
                     }
-
-
                 }
-                catch (IOException e){}
+                catch (IOException e){}*/
             }
         });
 
@@ -127,6 +124,41 @@ public class TabFragmentCheckIn extends Fragment {
         return v;
 
     }
+
+    public static void click() {
+
+
+        try
+        {
+            HttpClient httpClient = new DefaultHttpClient();
+
+            String url = "http://192.168.35.61:8080/0401/checkin.jsp";
+            String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
+            String pwd = String.valueOf(LoginActivity.password.getText().toString());
+
+            if(studnum!=null&&pwd!=null&&RecoMonitoringActivity.time!=null&&RecoMonitoringListAdapter.attendance!=null) {
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                nameValuePairs.add(new BasicNameValuePair("Student Number", studnum));
+                nameValuePairs.add(new BasicNameValuePair("Password", pwd));
+                nameValuePairs.add(new BasicNameValuePair("Time", RecoMonitoringActivity.time));
+                nameValuePairs.add(new BasicNameValuePair("Attendance", RecoMonitoringListAdapter.attendance));
+
+                HttpParams params = httpClient.getParams();
+                HttpConnectionParams.setConnectionTimeout(params, 5000);
+                HttpConnectionParams.setSoTimeout(params, 5000);
+
+                HttpPost httpPost1 = new HttpPost(url);
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nameValuePairs, "euc-kr");
+                httpPost1.setEntity(entity);
+
+                HttpResponse response = httpClient.execute(httpPost1);
+                HttpEntity resEntity = response.getEntity();
+            }
+        }
+        catch (IOException e){}
+    }
+
 
 
 }
