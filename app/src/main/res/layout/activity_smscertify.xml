@@ -21,7 +21,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="으로 인증번호가 전송되었습니다."
-                android:layout_weight="1"
+                android:layout_weight="7"
                 android:textSize="17sp"
                 android:textAlignment="center"
                 android:background="#dce2ec"
@@ -43,7 +43,7 @@
                 android:layout_weight="1"
                 android:textSize="17sp"
                 android:textAlignment="center"
-                android:background="#7eb149"/>
+                android:background="@drawable/mybutton"/>
         </TableRow>
 
         <TableRow>
@@ -55,7 +55,7 @@
                 android:layout_weight="1"
                 android:textSize="17sp"
                 android:textAlignment="center"
-                android:background="#92b2c1"
+                android:background="@drawable/mybutton"
                 android:layout_marginTop="10dp"
                 />
         </TableRow>

@@ -1,9 +1,17 @@
 package com.ds.owl.dsdormitory;
 
+import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.StrictMode;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
@@ -29,8 +37,11 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.R.attr.id;
+import static android.content.ContentValues.TAG;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,7 +51,14 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String name="";
     String result="";
-    static final int GET_NAME = 1;
+
+    private static final int MY_PERMISSION_REQUEST_CODE = 10;
+    private View mLayout;
+    String txtPhoneNo;
+    String txtMessage;
+    Random rand = new Random();
+    public static String random_num;
+    public static String phone_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         studentnumber = (AutoCompleteTextView)findViewById(R.id.sudent_number);
         password = (EditText)findViewById(R.id.password);
         loginbutton = (Button)findViewById(R.id.sign_in_button);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+
+            }
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -64,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    String page = "http://192.168.35.61:8080/0401/dormlogin.jsp";
+                                    String page = "http://192.168.35.119:8080/0401/dormlogin.jsp";
                                     HttpClient http = new DefaultHttpClient();
 
                                     ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();
@@ -82,19 +106,27 @@ public class LoginActivity extends AppCompatActivity {
                                     if (jArray.length() > 0) {
                                         JSONObject row = jArray.getJSONObject(0);
                                         name = row.getString("name");
+                                        phone_number = row.getString("phone_num");
                                         result = name + "님 환영합니다.";
                                         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
-                                        Intent intent = new Intent(getApplicationContext(), SMScertifyActivity.class);
-                                        startActivity(intent);
 
-                                        //Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        //startActivity(intent);
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestSMSPermission();
+                                            } else {
+                                                random_num = String.valueOf(rand.nextInt(8999)+1000).toString();
+                                                txtPhoneNo = phone_number;
+                                                txtMessage = "인증번호는 " + random_num;
+                                                Log.d("random_num", random_num);
+                                                Log.v("tag명 ", String.valueOf(random_num));
+                                                if (txtPhoneNo.length() > 0 && txtMessage.length() > 0)
+                                                    sendSMS(txtPhoneNo, txtMessage);
+                                                else
+                                                    Toast.makeText(getBaseContext(), "SMS 접근권한 없음", Toast.LENGTH_SHORT).show();
+                                            }
                                     } else {
                                         result = "아이디 또는 비밀번호가 일치하지 않습니다.";
                                         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
                                     }
-
-
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 } catch (JSONException e) {
@@ -103,11 +135,52 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         });
                     }
-
-
-                });
-                th.start();
+                });th.start();
             }
         });
+    }
+
+    private void requestSMSPermission() {
+        if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)|| !ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECEIVE_SMS ))  {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS}, MY_PERMISSION_REQUEST_CODE);
+            return;
+        }
+
+        Snackbar.make(mLayout, R.string.common_signin_button_text, Snackbar.LENGTH_INDEFINITE)
+                .setAction(R.string.common_signin_button_text, new View.OnClickListener() {
+                    public void onClick(View v) {
+                        ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.RECEIVE_SMS}, MY_PERMISSION_REQUEST_CODE);
+                    }
+                })
+                .show();
+    }
+
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSION_REQUEST_CODE:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                    random_num = String.valueOf(rand.nextInt(8999)+1000).toString();
+                    txtPhoneNo = phone_number;
+                    txtMessage = "인증번호는 " + random_num;
+                    Log.d("random_num", random_num);
+                    Log.v("tag명 ", String.valueOf(random_num));
+                    if (txtPhoneNo.length() > 0 && txtMessage.length() > 0)
+                        sendSMS(txtPhoneNo, txtMessage);
+                    else
+                        Toast.makeText(getBaseContext(),
+                                "일치하지 않음",
+                                Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "SMS 접근 권한 없음");
+                }
+                break;
+        }
+    }
+
+    private void sendSMS(String phoneNumber, String message) {
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(phoneNumber, null, message, null, null);
+        Intent intent1 = new Intent(getApplicationContext(), SMScertifyActivity.class);
+        startActivity(intent1);
     }
 }

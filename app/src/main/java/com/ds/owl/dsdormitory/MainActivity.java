@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -25,7 +23,6 @@ import android.widget.TextView;
 
 import com.perples.recosdk.RECOBeacon;
 
-import static com.ds.owl.dsdormitory.LoginActivity.GET_NAME;
 import static com.ds.owl.dsdormitory.LoginActivity.name;
 
 public class MainActivity extends AppCompatActivity {

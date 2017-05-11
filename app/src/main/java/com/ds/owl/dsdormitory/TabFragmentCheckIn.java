@@ -132,7 +132,7 @@ public class TabFragmentCheckIn extends Fragment {
         {
             HttpClient httpClient = new DefaultHttpClient();
 
-            String url = "http://192.168.35.61:8080/0401/checkin.jsp";
+            String url = "http://192.168.35.119:8080/0401/checkin.jsp";
             String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
             String pwd = String.valueOf(LoginActivity.password.getText().toString());
 
