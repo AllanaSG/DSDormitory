@@ -7,7 +7,6 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
@@ -15,13 +14,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.TabHost;
 import android.widget.TextView;
-
-import com.perples.recosdk.RECOBeacon;
 
 import static com.ds.owl.dsdormitory.LoginActivity.name;
 
@@ -92,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("공지사항"),TabFragmentAnnounce.class ,null);
         mAdapter.addTab(tabHost.newTabSpec("tba2").setIndicator("점호"),TabFragmentCheckIn.class,null);
         mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("외박신청"),TabFragmentOut.class ,null);
-        mAdapter.addTab(tabHost.newTabSpec("tab4").setIndicator("상·벌점"),TabFragmentScore.class ,null);
+        mAdapter.addTab(tabHost.newTabSpec("tab4").setIndicator("세탁실"),TabFragmentLaundry.class ,null);
 
         mAdapter.setOnChangedListener(new TabHost.OnTabChangeListener() {
             @Override

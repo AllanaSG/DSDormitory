@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    String page = "http://192.168.35.119:8080/0401/dormlogin.jsp";
+                                    String page = "http://192.168.35.164:8080/0401/dormlogin.jsp";
                                     HttpClient http = new DefaultHttpClient();
 
                                     ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();
@@ -109,20 +109,9 @@ public class LoginActivity extends AppCompatActivity {
                                         phone_number = row.getString("phone_num");
                                         result = name + "님 환영합니다.";
                                         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
+                                        Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(intent1);
 
-                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                                                requestSMSPermission();
-                                            } else {
-                                                random_num = String.valueOf(rand.nextInt(8999)+1000).toString();
-                                                txtPhoneNo = phone_number;
-                                                txtMessage = "인증번호는 " + random_num;
-                                                Log.d("random_num", random_num);
-                                                Log.v("tag명 ", String.valueOf(random_num));
-                                                if (txtPhoneNo.length() > 0 && txtMessage.length() > 0)
-                                                    sendSMS(txtPhoneNo, txtMessage);
-                                                else
-                                                    Toast.makeText(getBaseContext(), "SMS 접근권한 없음", Toast.LENGTH_SHORT).show();
-                                            }
                                     } else {
                                         result = "아이디 또는 비밀번호가 일치하지 않습니다.";
                                         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();
