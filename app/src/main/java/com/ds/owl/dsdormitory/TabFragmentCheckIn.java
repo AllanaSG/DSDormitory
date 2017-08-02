@@ -47,6 +47,7 @@ public class TabFragmentCheckIn extends Fragment {
     private static final int REQUEST_LOCATION = 10;
 
     ToggleButton backmonitoringBtn;
+    ToggleButton backrangingBtn;
     Button foremonitoringBtn;
 
     public TabFragmentCheckIn() {
@@ -74,6 +75,24 @@ public class TabFragmentCheckIn extends Fragment {
                 } else {
                     Log.i("MainActivity", "onMonitoringToggleButtonClicked on to off");
                     //stopService(new Intent(this, RecoBackgroundMonitoringService.class));
+                }
+            }
+        });
+
+        backrangingBtn = (ToggleButton)v.findViewById(R.id.backgroundRangingToggleButton);
+
+        backrangingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToggleButton toggle = (ToggleButton)v;
+                if(toggle.isChecked()) {
+                    Log.i("MainActivity", "onRangingToggleButtonClicked off to on");
+                    //Intent intent = new Intent(this, RecoBackgroundRangingService.class);
+                    //startService(intent);
+                    getActivity().startService(new Intent(getActivity(),RecoBackgroundRangingService.class));
+                } else {
+                    Log.i("MainActivity", "onRangingToggleButtonClicked on to off");
+                    //stopService(new Intent(this, RecoBackgroundRangingService.class));
                 }
             }
         });

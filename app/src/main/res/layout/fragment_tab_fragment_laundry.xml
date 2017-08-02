@@ -14,26 +14,36 @@
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
-                android:background="@drawable/selector_laundry"/>
+                android:background="@drawable/red"/>
             <Button
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
-                android:background="@drawable/selector_laundry"/>
+                android:background="@drawable/red"/>
         </TableRow>
         <TableRow>
             <Button
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
-                android:background="@drawable/selector_laundry"/>
+                android:background="@drawable/blue"/>
             <Button
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
-                android:background="@drawable/selector_laundry"/>
+                android:background="@drawable/red"/>
         </TableRow>
-
+        <TableRow>
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="예약하기"
+                android:layout_weight="0.5"
+                android:background="@drawable/mybutton"
+                android:textColor="#ffffff"
+                android:textSize="20dp"
+                />
+        </TableRow>
 
 
     </TableLayout>

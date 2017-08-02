@@ -16,6 +16,13 @@
         android:textOn="ON"
         android:textOff="OFF"
         />
+    <ToggleButton
+        android:id="@+id/backgroundRangingToggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textOn="ON"
+        android:textOff="OFF"
+        />
 
     <Button
         android:id="@+id/monitoringButton"
