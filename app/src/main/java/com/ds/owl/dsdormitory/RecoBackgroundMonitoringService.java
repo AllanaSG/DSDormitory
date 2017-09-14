@@ -16,6 +16,18 @@ import com.perples.recosdk.RECOErrorCode;
 import com.perples.recosdk.RECOMonitoringListener;
 import com.perples.recosdk.RECOServiceConnectListener;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,6 +50,7 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
 
     private RECOBeaconManager mRecoManager;
     private ArrayList<RECOBeaconRegion> mRegions;
+
 
     @Override
     public void onCreate() {
@@ -179,16 +192,62 @@ public class RecoBackgroundMonitoringService extends Service implements RECOMoni
 
     private void popupNotification(String msg) {
         Log.i("BackMonitoringService", "popupNotification()");
-        String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format(new Date());
+        String currentTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.KOREA).format(new Date());
         NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this).setSmallIcon(R.drawable.ic_launcher)
                 .setContentTitle(msg + " " + currentTime)
                 .setContentText(msg);
 
+        setCheckIn(currentTime, msg);
         NotificationCompat.InboxStyle inboxStyle = new NotificationCompat.InboxStyle();
         builder.setStyle(inboxStyle);
         nm.notify(mNotificationID, builder.build());
         mNotificationID = (mNotificationID - 1) % 1000 + 9000;
+
+
+    }
+
+    public void setCheckIn(String currentTime, String msg) {
+        try
+        {
+            HttpClient httpClient = new DefaultHttpClient();
+
+            String url = "http://192.168.35.101:8080/0401/checkin.jsp";
+            String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
+            String pwd = String.valueOf(LoginActivity.password.getText().toString());
+
+            if(studnum!=null&&pwd!=null) {
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+
+                nameValuePairs.add(new BasicNameValuePair("Student Number", studnum));
+                nameValuePairs.add(new BasicNameValuePair("Password", pwd));
+                nameValuePairs.add(new BasicNameValuePair("Time", currentTime));
+                nameValuePairs.add(new BasicNameValuePair("Attendance", msg));
+
+                Log.v("student", studnum);
+                Log.v("checkTime", currentTime);
+                Log.v("Attendance", msg);
+
+                HttpParams params = httpClient.getParams();
+                HttpConnectionParams.setConnectionTimeout(params, 5000);
+                HttpConnectionParams.setSoTimeout(params, 5000);
+
+                HttpPost httpPost1 = new HttpPost(url);
+                UrlEncodedFormEntity entity = new UrlEncodedFormEntity(nameValuePairs, "euc-kr");
+                httpPost1.setEntity(entity);
+
+                HttpResponse response = httpClient.execute(httpPost1);
+                HttpEntity resEntity = response.getEntity();
+
+                Log.v("response", response.getStatusLine().toString());
+            }
+        }
+        catch (IOException e){
+            Log.v("checkTime2", currentTime);
+            Log.v("Attendance2", msg);
+            Log.d("checkTime2", currentTime);
+            Log.d("Attendance2", msg);
+        }
     }
 
     @Override

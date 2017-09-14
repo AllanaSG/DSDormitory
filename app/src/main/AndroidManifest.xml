@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ds.owl.dsdormitory">
 
+    <uses-feature android:name="android.hardware.usb.host"/>
+
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="23" />
@@ -33,13 +35,21 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter"/>
         </activity>
 
         <service android:name="com.perples.recosdk.RECOBeaconService" />
         <service android:name=".RecoBackgroundMonitoringService" />
 
         <activity android:name=".RecoMonitoringActivity" />
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".LoginActivity">
+
+        </activity>
 
 
         <meta-data
@@ -56,6 +66,8 @@
             <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
         </intent-filter>
         </receiver>
+
+
 
     </application>
 

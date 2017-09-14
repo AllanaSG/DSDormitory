@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAdapter = new TabsAdapter(this, getSupportFragmentManager(), tabHost, pager);
 
-        mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("공지사항"),TabFragmentAnnounce.class ,null);
+        //mAdapter.addTab(tabHost.newTabSpec("tab1").setIndicator("공지사항"),TabFragmentAnnounce.class ,null);
         mAdapter.addTab(tabHost.newTabSpec("tba2").setIndicator("점호"),TabFragmentCheckIn.class,null);
         mAdapter.addTab(tabHost.newTabSpec("tab3").setIndicator("외박신청"),TabFragmentOut.class ,null);
         mAdapter.addTab(tabHost.newTabSpec("tab4").setIndicator("세탁실"),TabFragmentLaundry.class ,null);

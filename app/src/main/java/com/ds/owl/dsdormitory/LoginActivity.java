@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    String page = "http://192.168.35.164:8080/0401/dormlogin.jsp";
+                                    String page = "http://192.168.35.101:8080/0401/dormlogin.jsp";
                                     HttpClient http = new DefaultHttpClient();
 
                                     ArrayList<NameValuePair> postData = new ArrayList<NameValuePair>();

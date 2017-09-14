@@ -151,7 +151,7 @@ public class TabFragmentCheckIn extends Fragment {
         {
             HttpClient httpClient = new DefaultHttpClient();
 
-            String url = "http://192.168.35.164:8080/0401/checkin.jsp";
+            String url = "http://192.168.0.67:8080/0401/checkin.jsp";
             String studnum = String.valueOf(LoginActivity.studentnumber.getText().toString());
             String pwd = String.valueOf(LoginActivity.password.getText().toString());
 
@@ -175,7 +175,9 @@ public class TabFragmentCheckIn extends Fragment {
                 HttpEntity resEntity = response.getEntity();
             }
         }
-        catch (IOException e){}
+        catch (IOException e){
+
+        }
     }
 
 

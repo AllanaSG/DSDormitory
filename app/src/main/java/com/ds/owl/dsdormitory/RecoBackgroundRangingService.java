@@ -40,6 +40,18 @@ import com.perples.recosdk.RECOMonitoringListener;
 import com.perples.recosdk.RECORangingListener;
 import com.perples.recosdk.RECOServiceConnectListener;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
+
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -161,15 +173,6 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
     private void startRangingWithRegion(RECOBeaconRegion region) {
         Log.i("BackRangingService", "startRangingWithRegion()");
 
-        /**
-         * There is a known android bug that some android devices scan BLE devices only once. (link: http://code.google.com/p/android/issues/detail?id=65863)
-         * To resolve the bug in our SDK, you can use setDiscontinuousScan() method of the RECOBeaconManager.
-         * This method is to set whether the device scans BLE devices continuously or discontinuously.
-         * The default is set as FALSE. Please set TRUE only for specific devices.
-         *
-         * mRecoManager.setDiscontinuousScan(true);
-         */
-
         try {
             mRecoManager.startRangingBeaconsInRegion(region);
         } catch (RemoteException e) {
@@ -280,6 +283,8 @@ public class RecoBackgroundRangingService extends Service implements RECORanging
         builder.setStyle(inboxStyle);
         nm.notify(mNotificationID, builder.build());
         mNotificationID = (mNotificationID - 1) % 1000 + 9000;
+
+
     }
 
     @Override
