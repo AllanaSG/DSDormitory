@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private static final int MY_PERMISSION_REQUEST_CODE = 10;
     private View mLayout;
-    String txtPhoneNo;
+    public static String txtPhoneNo;
     String txtMessage;
     Random rand = new Random();
     public static String random_num;
@@ -111,6 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_LONG).show();
                                         Intent intent1 = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(intent1);
+                                        //requestSMSPermission();
+
 
                                     } else {
                                         result = "아이디 또는 비밀번호가 일치하지 않습니다.";

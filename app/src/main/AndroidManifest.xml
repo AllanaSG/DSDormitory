@@ -2,18 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ds.owl.dsdormitory">
 
-    <uses-feature android:name="android.hardware.usb.host"/>
-
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="23" />
+
+    <uses-feature android:name="android.hardware.usb.host" />
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -29,18 +29,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".MainActivity">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
-                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"/>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
             </intent-filter>
+
             <meta-data
                 android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
-                android:resource="@xml/device_filter"/>
+                android:resource="@xml/device_filter" />
         </activity>
 
         <service android:name="com.perples.recosdk.RECOBeaconService" />
@@ -48,9 +45,12 @@
 
         <activity android:name=".RecoMonitoringActivity" />
         <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -62,13 +62,15 @@
             android:name=".SMSreciever"
             android:enabled="true"
             android:exported="true">
-        <intent-filter>
-            <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
         </receiver>
 
-
-
+        <activity
+            android:name=".DateandTimeActivity"
+            android:label="@string/title_activity_dateand_time"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

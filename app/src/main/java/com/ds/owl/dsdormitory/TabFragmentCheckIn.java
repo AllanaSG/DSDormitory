@@ -146,7 +146,6 @@ public class TabFragmentCheckIn extends Fragment {
 
     public static void click() {
 
-
         try
         {
             HttpClient httpClient = new DefaultHttpClient();

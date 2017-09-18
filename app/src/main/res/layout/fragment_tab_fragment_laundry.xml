@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     tools:context="com.ds.owl.dsdormitory.TabFragmentLaundry">
 
+    <Button
+        android:id="@+id/get_reserve"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="내 예약 현황"/>
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -11,11 +16,13 @@
         android:layout_centerVertical="true">
         <TableRow>
             <Button
+                android:id="@+id/laundry1"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
                 android:background="@drawable/blue"/>
             <Button
+                android:id="@+id/laundry2"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
@@ -23,11 +30,13 @@
         </TableRow>
         <TableRow>
             <Button
+                android:id="@+id/laundry3"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
                 android:background="@drawable/blue"/>
             <Button
+                android:id="@+id/laundry4"
                 android:layout_width="130dp"
                 android:layout_height="130dp"
                 android:layout_margin="18dp"
@@ -36,6 +45,15 @@
 
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
    
 </RelativeLayout>
